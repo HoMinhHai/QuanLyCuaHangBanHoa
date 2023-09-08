@@ -1,0 +1,223 @@
+﻿@using Nhom18WebBanHoa.Models;
+@model San_Pham
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#addtocart").click(function () {
+            var model = {};
+            model.id = @Model.id;
+            model.Quantity = $("#ipQuantity").val();
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart", "GioHang")',
+                data: JSON.stringify(model),
+                dataType: "Json",
+                contentType: "application/json; charset = utf-8",
+                success: function () {
+                    alert("Thên giỏ hàng thành công!")
+                    $('#CartCount').text(@Session["count"] + 1);
+                },
+                error: function () {
+                    alert("Lỗi trong khi thêm vào giỏ hàng!");
+                }
+            });
+            return false;
+        });
+    });
+</script>
+<!-- Breadcrumb Section End -->
+<!-- Product Details Section Begin -->
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__item">
+                        <img class="product__details__pic__item--large"
+                             src="~/Images/@Model.hinh" />
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__text">
+                    <h3>@Model.tenSP</h3>
+                    <div class="product__details__rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                        <span></span>
+                    </div>
+                    <div class="product__details__price">@Model.gia.GetValueOrDefault(0).ToString("N0") VND</div>
+
+                    <div class="product__details__quantity">
+                        <div class="quantity">
+                            <div class="pro-qty">
+                                <input type="text" id="ipQuantity" value="1">
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" id="addtocart" class="primary-btn">ADD TO CARD</a>
+
+                    <ul>
+                        <li><b>Weight</b> <span>@Model.mota</span></li>
+
+                        <li><b>Shipping</b> <span>Nhanh Chóng<samp></samp></span></li>
+
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="product__details__tab">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                               aria-selected="true">Miêu tả</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
+                               aria-selected="false">Thông tin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                               aria-selected="false">Đánh giá<span>(1)</span></a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div class="product__details__tab__desc">
+                                <h6>Thông tin sản phẩm</h6>
+                                <p>
+                                    Trong ngày lễ tình nhân hay mỗi dịp kỉ niệm tình yêu, hoa hồng là một món quà không thể thiếu. 
+                                    Bởi lẽ đó là loại hoa tượng trưng cho tình yêu được nhiều người biết đến nhất trên thế giới, 
+                                    là loại hoa ngọt ngào, nồng thắm mà tình yêu đã len lỏi vào từng cánh hoa, nhị hoa và cả hương 
+                                    thơm dịu nhẹ phảng phất...
+                                </p>
+                                <p>
+                                    Trong tiếng việt ta, “bách hợp” có nghĩa là trăm sự hòa hợp. Chính bởi vậy nên người ta thường
+                                    chọn hoa bách hợp để mong muốn mọi điều tốt lành đến với người nhận hoa.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-2" role="tabpanel">
+                            <div class="product__details__tab__desc">
+                                <h6>Thông tin sản phẩm</h6>
+                                <p>
+                                    Hoa hướng dương tượng trưng cho sự đáng yêu, trung thành và trường thọ. 
+                                    Phần lớn ý nghĩa của hoa hướng dương bắt nguồn từ chính cái tên của nó, 
+                                    chính là mặt trời - một biểu tượng mãnh liệt của sự sống. ... 
+                                    Ngoài ra, Hoa hướng dương được biết đến là loài hoa hạnh phúc đối với người Do Thái, 
+                                    làm cho chúng trở thành món quà hoàn hảo để mang lại niềm vui cho ngày đặc biệt của ai đó 
+                                    hoặc của chính bạn..
+                                </p>
+                                <p>
+                                    Đối với hoa hồng, ý nghĩa bày tỏ không chỉ nằm ở màu sắc, mà còn thể hiện ở cả số lượng hoa bạn tặng. 
+                                    Nếu không chủ ý trước rằng mình sẽ tặng hoa theo số tuổi, hoặc số ngày quen nhau,... 
+                                    bạn hãy cũng Ogani.com tìm hiểu xem, thông điệp mình muốn nhắn nhủ sẽ nằm ở con số nào nhé!
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-3" role="tabpanel">
+                            <div class="product__details__tab__desc">
+                                <h6>Nguyễn Anh Khoa</h6>
+                                <p>
+                                    Hoa rất đẹp :3
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Details Section End -->
+<!-- Related Product Section Begin -->
+<section class="related-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title related__product__title">
+                    <h2>SẢN PHẨM TƯƠNG TỰ</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="~/Content/img/product/hoabinh1.jpg">
+                        <img src="~/Content/img/product/hoabinh1.jpg" />
+                        <ul class="product__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="#">Yên Bình</a></h6>
+                        <h5>1.500.000VND</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="~/Content/img/product/hoabinh2.jpg">
+                        <img src="~/Content/img/product/hoabinh2.jpg" />
+                        <ul class="product__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="#">Gia Lâm</a></h6>
+                        <h5>900.000 VND</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="~/Content/img/product/hoabinh3.jpg">
+                        <img src="~/Content/img/product/hoabinh3.jpg" />
+                        <ul class="product__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="#">Phúc Tuệ</a></h6>
+                        <h5>200.000 VND</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="~/Content/img/product/hoabinh4.jpg">
+                        <img src="~/Content/img/product/hoabinh4.jpg">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="#">Minh Dương</a></h6>
+                        <h5>210.000 VND</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+v
